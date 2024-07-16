@@ -8,14 +8,21 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 public class OneCity {
     public static void main(String[] args) {
         //driver launch
-        System.setProperty("webdriver.chrome.driver", "F:\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\chrome_drive\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
 
         // open login page, and login
         driver.get("https://visa.vfsglobal.com/blr/ru/pol/login");
+
+        options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
+        driver = webdriver.Chrome(options=options)
+
+
         new WebDriverWait(driver, 15).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("mat-input-0")));
         driver.findElement(By.id("mat-input-0")).sendKeys(LoginAndPassword.LGN);
         driver.findElement(By.id("mat-input-1")).sendKeys(LoginAndPassword.PSWD);
@@ -23,31 +30,52 @@ public class OneCity {
 
         //close cookie's window
         driver.findElement(By.xpath("//*[@id='onetrust-close-btn-container']/button")).click();
-
-        //Click Login button
-        driver.findElement(By.xpath("//button[contains(@class,'ng-star-inserted')]")).click();
-        timer(15000L);
-
-        //click booking button
-        driver.findElement(By.xpath("//button[contains(@class,'z-index-999')]")).click();
-        timer(2000L);
-
-        //select VC
-        driver.findElement(By.xpath("//*[@id='mat-select-value-1']/span")).click();
-        driver.findElement(By.xpath("//span[contains(text(),'Poland Visa Application Center-Grodno')]")).click();
         timer(10000L);
 
-        //select category
-        driver.findElement(By.xpath("//*[@id='mat-select-value-3']/span")).click();
-        driver.findElement(By.xpath("//span[contains(text(), ' National Visa D ')]")).click();
-        timer(10000L);
+        WebElement webElement = driver.findElement(By.xpath("//iframe[contains(@src, 'https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/if/ov2/av0/rcv0/*')]"));
+        driver.switchTo().frame(webElement);
+
+//        driver=  driver.switchTo().frame("cf-chl-widget-o405g");
 
 
-        // loop method 100 times every 8 minutes
-        for (int i = 0; i < 100; i++) {
-            changeVisaType(driver);
-            timer(480000L);
-        }
+        WebElement webElement2 = driver.findElement(By.xpath("//div[@class='cb-lb']"));
+        System.out.println(webElement2.getText());
+        System.out.println(webElement2.getTagName());
+        timer(5000L);
+
+//        List<WebElement> webElements = driver.findElements(By.name("checkbox"));
+
+//        for WebElement in webElements :
+
+
+//        //Click Login button
+//        driver.findElement(By.id("qrVk5']")).click();
+//        timer(15000L);
+//
+//        //Click Login button
+//        driver.findElement(By.xpath("//button[contains(@class,'ng-star-inserted')]")).click();
+//        timer(15000L);
+//
+//        //click booking button
+//        driver.findElement(By.xpath("//button[contains(@class,'z-index-999')]")).click();
+//        timer(2000L);
+//
+//        //select VC
+//        driver.findElement(By.xpath("//*[@id='mat-select-value-1']/span")).click();
+//        driver.findElement(By.xpath("//span[contains(text(),'Poland Visa Application Center-Grodno')]")).click();
+//        timer(10000L);
+//
+//        //select category
+//        driver.findElement(By.xpath("//*[@id='mat-select-value-3']/span")).click();
+//        driver.findElement(By.xpath("//span[contains(text(), ' National Visa D ')]")).click();
+//        timer(10000L);
+//
+//
+//        // loop method 100 times every 8 minutes
+//        for (int i = 0; i < 100; i++) {
+//            changeVisaType(driver);
+//            timer(480000L);
+//        }
 
 
     }
